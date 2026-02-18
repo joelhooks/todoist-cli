@@ -1,0 +1,12 @@
+{
+  "name": "todoist-cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "todoist-cli": "./src/cli.ts"
+  },
+  "dependencies": {
+    "@doist/todoist-api-typescript": "latest"
+  }
+}
