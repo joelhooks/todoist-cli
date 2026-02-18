@@ -2,7 +2,7 @@
 
 Agent-first CLI for [Todoist](https://todoist.com). HATEOAS JSON output, zero config, built for AI agents that manage tasks.
 
-Built on the [official Todoist TypeScript SDK](https://github.com/Doist/todoist-api-typescript) (v6). No reverse-engineered APIs, no fragile sync protocols.
+Built on the [official Todoist TypeScript SDK](https://github.com/Doist/todoist-api-typescript) (v6).
 
 ## Install
 
@@ -117,15 +117,7 @@ Errors include a fix suggestion:
 }
 ```
 
-## Why This Exists
-
-[Things 3](https://culturedcode.com/things/) is a beautiful app with a reverse-engineered, event-sourced sync protocol that corrupts when you write unicode em-dashes in task descriptions. The iOS client crashes and history is immutable — there's no delete API for sync events.
-
-Todoist has an official, documented REST API. Markdown in descriptions works. No crashes. This CLI wraps it for agent consumption.
-
 ## Design Principles
-
-From the [cli-design skill](https://github.com/joelhooks/joelclaw):
 
 1. **JSON always** — no plain text, no tables, no ANSI
 2. **HATEOAS** — every response includes `next_actions`
@@ -146,4 +138,3 @@ MIT
 ## Credits
 
 - [Todoist](https://todoist.com) and [Doist](https://doist.com) for the API and SDK
-- Things 3 by [Cultured Code](https://culturedcode.com) for the lesson in fragile sync protocols
