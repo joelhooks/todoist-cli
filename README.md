@@ -1,4 +1,4 @@
-# todoist-cli
+# 📋 todoist-cli
 
 Agent-first CLI for [Todoist](https://todoist.com). HATEOAS JSON output, zero config, built for AI agents that manage tasks.
 
