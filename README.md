@@ -33,14 +33,20 @@ ln -s "$(pwd)/src/cli.ts" ~/bin/todoist-cli
 
 ## Auth
 
-Set `TODOIST_API_TOKEN` env var, or store in [agent-secrets](https://github.com/joelhooks/agent-secrets):
+Set `TODOIST_API_TOKEN` as an environment variable:
+
+```bash
+export TODOIST_API_TOKEN=<your token>
+# Get it from https://app.todoist.com/app/settings/integrations/developer
+```
+
+Optionally, if you use [agent-secrets](https://github.com/joelhooks/agent-secrets), the CLI will auto-lease:
 
 ```bash
 secrets add todoist_api_token
-# Paste your token from https://app.todoist.com/app/settings/integrations/developer
 ```
 
-The CLI leases the token automatically via `secrets lease todoist_api_token`.
+Auth priority: `TODOIST_API_TOKEN` env var → `agent-secrets` lease → error with setup instructions.
 
 ## Usage
 

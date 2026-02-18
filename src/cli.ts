@@ -31,16 +31,27 @@ type Task = {
 // ── Auth ────────────────────────────────────────────────────────────
 
 function getToken(): string {
+  // 1. Env var (works everywhere)
   const env = process.env.TODOIST_API_TOKEN;
   if (env) return env;
+
+  // 2. agent-secrets (optional — only if `secrets` CLI is available)
   try {
-    return execSync("secrets lease todoist_api_token --ttl 1h --raw 2>/dev/null", {
+    const token = execSync("secrets lease todoist_api_token --ttl 1h --raw 2>/dev/null", {
       encoding: "utf-8",
-      timeout: 5000,
+      timeout: 3000,
     }).trim();
+    if (token) return token;
   } catch {
-    fatal("No TODOIST_API_TOKEN env var and secrets lease failed. Run: secrets add todoist_api_token");
+    // agent-secrets not installed or not configured — that's fine
   }
+
+  fatal(
+    "No TODOIST_API_TOKEN found. Set it via:\n" +
+    "  export TODOIST_API_TOKEN=<token>          # env var\n" +
+    "  secrets add todoist_api_token              # agent-secrets (optional)\n" +
+    "Get your token at: https://app.todoist.com/app/settings/integrations/developer"
+  );
 }
 
 function getApi(): TodoistApi {
