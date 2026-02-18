@@ -6,10 +6,30 @@ Built on the [official Todoist TypeScript SDK](https://github.com/Doist/todoist-
 
 ## Install
 
+**One-liner** (macOS / Linux):
+
 ```bash
+curl -fsSL https://raw.githubusercontent.com/joelhooks/todoist-cli/main/install.sh | bash
+```
+
+Detects OS and architecture automatically. Installs to `/usr/local/bin` by default.
+
+Install somewhere else:
+
+```bash
+TODOIST_CLI_DIR=~/bin curl -fsSL https://raw.githubusercontent.com/joelhooks/todoist-cli/main/install.sh | bash
+```
+
+**From source** (requires [Bun](https://bun.sh)):
+
+```bash
+git clone https://github.com/joelhooks/todoist-cli.git
+cd todoist-cli
 bun install
 ln -s "$(pwd)/src/cli.ts" ~/bin/todoist-cli
 ```
+
+**Prebuilt binaries**: [GitHub Releases](https://github.com/joelhooks/todoist-cli/releases) — darwin-arm64, darwin-x64, linux-x64, linux-arm64.
 
 ## Auth
 
