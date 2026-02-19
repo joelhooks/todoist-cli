@@ -28,6 +28,8 @@ This CLI is for **agents**. Every response is structured JSON with `next_actions
 
 Ref resolution pattern credit: [Doist/todoist-cli](https://github.com/Doist/todoist-cli) `src/lib/refs.ts` (MIT license).
 
+The official CLI also ships agent skills via `td skill install claude-code` — but those skills describe `td`'s human-oriented output. This repo ships a skill (`skills/todoist/SKILL.md`) that describes the HATEOAS JSON contract agents actually parse.
+
 ## Install
 
 **One-liner** (downloads prebuilt binary from GitHub Releases):
@@ -40,6 +42,12 @@ Detects OS/arch, installs to `/usr/local/bin`. Override with `TODOIST_CLI_DIR`:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/joelhooks/todoist-cli/main/install.sh | TODOIST_CLI_DIR=~/.local/bin bash
+```
+
+**Agent skill** (for Claude Code, pi, or any `npx skills` compatible agent):
+
+```bash
+npx skills add joelhooks/todoist-cli --skill todoist --yes --global
 ```
 
 **From source** (requires [Bun](https://bun.sh)):
