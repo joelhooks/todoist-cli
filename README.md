@@ -30,11 +30,31 @@ Ref resolution pattern credit: [Doist/todoist-cli](https://github.com/Doist/todo
 
 ## Install
 
+**One-liner** (downloads prebuilt binary from GitHub Releases):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/joelhooks/todoist-cli/main/install.sh | bash
+```
+
+Detects OS/arch, installs to `/usr/local/bin`. Override with `TODOIST_CLI_DIR`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/joelhooks/todoist-cli/main/install.sh | TODOIST_CLI_DIR=~/.local/bin bash
+```
+
+**From source** (requires [Bun](https://bun.sh)):
+
 ```bash
 git clone https://github.com/joelhooks/todoist-cli.git
 cd todoist-cli
 bun install
 bun link
+```
+
+**Build standalone binary**:
+
+```bash
+bun build --compile src/cli.ts --outfile todoist-cli
 ```
 
 ## Auth
