@@ -37,7 +37,7 @@ function getToken(): string {
 
   // 2. agent-secrets (optional — only if `secrets` CLI is available)
   try {
-    const token = execSync("secrets lease todoist_api_token --ttl 1h --raw 2>/dev/null", {
+    const token = execSync("secrets lease todoist_api_token --ttl 1h 2>/dev/null", {
       encoding: "utf-8",
       timeout: 3000,
     }).trim();
