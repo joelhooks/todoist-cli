@@ -220,10 +220,14 @@ async function cmdToday() {
   ]);
 }
 
+function isInboxProject(project: { isInboxProject?: boolean; name?: string }): boolean {
+  return project.isInboxProject === true || project.name?.trim().toLowerCase() === "inbox";
+}
+
 async function cmdInbox() {
   const api = getApi();
   const { results: projects } = await api.getProjects();
-  const inbox = projects.find((p: any) => p.isInboxProject);
+  const inbox = projects.find(isInboxProject);
   if (!inbox) return fatal("No inbox project found");
 
   const { results: tasks } = await api.getTasks({ projectId: inbox.id });
@@ -620,7 +624,7 @@ async function cmdProjects() {
       id: p.id,
       name: p.name,
       color: p.color,
-      isInbox: p.isInboxProject ?? false,
+      isInbox: isInboxProject(p),
       isFavorite: p.isFavorite,
       url: p.url,
     })),
@@ -711,7 +715,7 @@ async function cmdReview() {
   const allTasks = allResp.results as Task[];
   const projects = projResp.results;
 
-  const inbox = projects.find((p: any) => p.isInboxProject);
+  const inbox = projects.find(isInboxProject);
   const inboxTasks = inbox ? allTasks.filter(t => t.projectId === inbox.id) : [];
 
   const today = new Date();
@@ -728,7 +732,7 @@ async function cmdReview() {
     inbox: { count: inboxTasks.length, tasks: inboxTasks.map(formatTask) },
     overdue: { count: overdue.length, tasks: overdue.map(formatTask) },
     floating: { count: noDue.length },
-    projects: projects.filter((p: any) => !p.isInboxProject).map((p: any) => ({
+    projects: projects.filter((p: any) => !isInboxProject(p)).map((p: any) => ({
       id: p.id,
       name: p.name,
       taskCount: allTasks.filter(t => t.projectId === p.id).length,
